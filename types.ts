@@ -1,0 +1,58 @@
+
+export type Page = 'dashboard' | 'integrations' | 'logs' | 'settings';
+
+export enum IntegrationPlatform {
+  Kirvano = 'Kirvano',
+  Cakto = 'Cakto',
+  Kiwify = 'Kiwify',
+  Custom = 'Webhook Personalizado'
+}
+
+export enum LogStatus {
+  Success = 'Sucesso',
+  Failed = 'Falha',
+  Processing = 'Processando'
+}
+
+export enum SubscriptionStatus {
+  Active = 'Ativa',
+  Canceled = 'Cancelada',
+  PastDue = 'Atrasada',
+  Expired = 'Expirada',
+  SinglePurchase = 'Compra Única'
+}
+
+export interface Integration {
+  platform: IntegrationPlatform;
+  connected: boolean;
+  logo: string;
+  dashboardUrl?: string;
+  webhookSecret?: string;
+  apiToken?: string;
+}
+
+export interface LogEntry {
+  id: string;
+  timestamp: Date;
+  platform: IntegrationPlatform;
+  userEmail: string;
+  plan: string;
+  status: LogStatus;
+  subStatus: SubscriptionStatus;
+  expiryDate?: Date;
+  error?: string;
+}
+
+export interface SaasConfig {
+    endpoint: string;
+    apiKey: string;
+}
+
+export interface User {
+  name: string;
+  email: string;
+  phone: string;
+  password?: string;
+  hasSeenOnboarding?: boolean;
+  hasActiveSubscription?: boolean;
+}
